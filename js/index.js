@@ -1,7 +1,12 @@
-const modalProduct = document.querySelector('.modal_product'); 
-const catalogList = document.querySelector('.catalog__list'); 
+import { modalProduct,
+    catalogList
+} from './elements.js';
 
-const product = {
+import { openModal } from './openModal.js';
+import { renderListProduct } from './renderListProduct.js';
+import { navigationListController } from './navigationListController.js';
+
+const burgerMax = {
     title: "Burger Max",
     weight: 10000,
     price: 5000,
@@ -17,48 +22,17 @@ const product = {
     ]
 };
 
-const modalProductTitle = document.querySelector('.modal-product__title');
-const modalProductImage = document.querySelector('.modal-product__image');
-const modalProductDescription = document.querySelector('.modal-product__description');
-const ingredientsList = document.querySelector('.ingredients__list');
-const ingredientsCalories = document.querySelector('.ingredients__calories');
-const modalProductPriceCount = document.querySelector('.modal-product__price-count');
 
-
-modalProductTitle.textContent = product.title; 
-modalProductImage.src = product.image;
-
-ingredientsList.textContent = '';
-
-// for (let i = 0; i < product.ingredients.length; i++) {
-//     const li = document.createElement('li');
-//     li.classList.add('ingredients__item');
-//     li.textContent = product.ingredients[i];
-//     ingredientsList.append(li);
-// }
-
-const ingredientsListItems = product.ingredients.map((item) => {
-    const li = document.createElement('li');
-    li.classList.add('ingredients__item');
-    li.textContent = item;
-    return li
-});
-
-ingredientsList.append(ingredientsListItems);
 
 catalogList.addEventListener('click', (event) => {
     const { target } = event;
 
     if (target.closest('.product__detail') 
     || target.closest('.product__detail')) {
-        modalProduct.classList.add('modal_open');
+        openModal(burgerMax);
+        
     };
 });
-
-// добавить 
-        // modalProductDescription
-        // ingredientsCalories
-        // modalProductPriceCount
 
 modalProduct.addEventListener('click', (event) => {
     const { target } = event;
@@ -68,3 +42,9 @@ modalProduct.addEventListener('click', (event) => {
     }    
 });
 
+const init = () => {
+    renderListProduct();
+    navigationListController();
+}
+
+init();
